@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mrityunjay Ranjan | Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface2: #1a1a26;
+      --accent: #6c63ff;
+      --accent2: #ff6584;
+      --text: #e8e8f0;
+      --muted: #7a7a9a;
+      --border: rgba(108,99,255,0.15);
+      --glow: rgba(108,99,255,0.25);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 99px; }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.4;
+    }
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      padding: 1.2rem 5%;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    .logo {
+      font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800;
+      background: linear-gradient(135deg, #6c63ff, #ff6584);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+      letter-spacing: 0.05em; transition: color 0.2s; position: relative;
+    }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta { padding: 0.5rem 1.2rem; background: transparent; border: 1px solid var(--accent); color: var(--accent) !important; border-radius: 6px; transition: all 0.2s !important; }
+    .nav-cta:hover { background: var(--accent) !important; color: white !important; }
+    .nav-cta::after { display: none !important; }
+    #hero { min-height: 100vh; display: flex; align-items: center; padding: 0 5%; position: relative; overflow: hidden; }
+    .hero-bg-orb { position: absolute; border-radius: 50%; filter: blur(120px); pointer-events: none; }
+    .orb1 { width: 600px; height: 600px; background: rgba(108,99,255,0.12); top: -100px; right: -100px; }
+    .orb2 { width: 400px; height: 400px; background: rgba(255,101,132,0.08); bottom: -50px; left: 20%; }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.4rem 1rem; border: 1px solid var(--border); border-radius: 99px;
+      font-size: 0.82rem; color: var(--muted); margin-bottom: 2rem;
+      background: var(--surface); animation: fadeInDown 0.6s ease both;
+    }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #4caf50; box-shadow: 0 0 8px #4caf50; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.8rem,7vw,5.5rem); font-weight: 800; line-height: 1.05; margin-bottom: 1.5rem; animation: fadeInUp 0.7s ease 0.1s both; }
+    .gradient-text { background: linear-gradient(135deg, #6c63ff 0%, #a78bfa 50%, #ff6584 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-desc { font-size: 1.1rem; color: var(--muted); max-width: 560px; margin-bottom: 2.5rem; line-height: 1.8; font-weight: 300; animation: fadeInUp 0.7s ease 0.2s both; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeInUp 0.7s ease 0.3s both; }
+    .btn-primary { padding: 0.85rem 2rem; background: var(--accent); color: white; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.25s; font-family: 'DM Sans', sans-serif; box-shadow: 0 0 30px rgba(108,99,255,0.35); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(108,99,255,0.5); }
+    .btn-secondary { padding: 0.85rem 2rem; background: transparent; color: var(--text); border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.25s; font-family: 'DM Sans', sans-serif; }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .hero-stats { display: flex; gap: 2.5rem; margin-top: 4rem; animation: fadeInUp 0.7s ease 0.4s both; flex-wrap: wrap; }
+    .stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--text); }
+    .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+    section { padding: 6rem 5%; position: relative; }
+    .section-header { margin-bottom: 3.5rem; }
+    .section-tag { display: inline-block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+    .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem,4vw,2.8rem); font-weight: 700; line-height: 1.15; }
+    .section-line { width: 50px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); margin-top: 1rem; border-radius: 99px; }
+    #about { background: var(--surface); }
+    .about-grid { display: grid; grid-template-columns: auto 1fr; gap: 5rem; align-items: center; }
+    .avatar-wrap { position: relative; display: inline-block; }
+    .avatar-frame { width: 280px; height: 280px; border-radius: 20px; background: linear-gradient(135deg, var(--accent), var(--accent2)); padding: 3px; }
+    .avatar-inner { width: 100%; height: 100%; border-radius: 18px; background: linear-gradient(135deg, #1a1a26, #0d0d18); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 4.5rem; font-weight: 800; }
+    .avatar-badge { position: absolute; bottom: -15px; right: -15px; background: var(--accent); border-radius: 12px; padding: 0.6rem 1rem; font-size: 0.8rem; font-weight: 600; border: 3px solid var(--surface); white-space: nowrap; }
+    .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-weight: 300; font-size: 1.05rem; line-height: 1.8; }
+    .about-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin: 1.5rem 0; }
+    .meta-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: var(--muted); }
+    .meta-item span:first-child { color: var(--accent); font-size: 1rem; }
+    .about-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+    .pill { padding: 0.4rem 0.9rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 99px; font-size: 0.82rem; color: var(--muted); transition: all 0.2s; }
+    .pill:hover { border-color: var(--accent); color: var(--accent); }
+    #skills { background: var(--bg); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .skill-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem; transition: all 0.3s; position: relative; overflow: hidden; }
+    .skill-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transform: scaleX(0); transition: transform 0.3s; }
+    .skill-card:hover { border-color: rgba(108,99,255,0.4); transform: translateY(-4px); }
+    .skill-card:hover::before { transform: scaleX(1); }
+    .skill-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .skill-cat { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-tag { padding: 0.25rem 0.65rem; background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.2); border-radius: 6px; font-size: 0.78rem; color: #a78bfa; }
+    #experience { background: var(--surface); }
+    .timeline { position: relative; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--accent), transparent); }
+    .timeline-item { padding-left: 2.5rem; margin-bottom: 3rem; position: relative; }
+    .timeline-dot { position: absolute; left: -5px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--glow); }
+    .timeline-period { font-size: 0.78rem; color: var(--accent); letter-spacing: 0.08em; font-weight: 600; margin-bottom: 0.4rem; }
+    .timeline-title { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .timeline-company { color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem; }
+    .timeline-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .timeline-list li { color: var(--muted); font-size: 0.93rem; line-height: 1.7; font-weight: 300; display: flex; gap: 0.6rem; align-items: flex-start; }
+    .timeline-list li::before { content: '▸'; color: var(--accent); flex-shrink: 0; margin-top: 0.05em; }
+    #certifications { background: var(--bg); }
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .cert-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem; display: flex; gap: 1.2rem; align-items: flex-start; transition: all 0.3s; }
+    .cert-card:hover { border-color: rgba(108,99,255,0.4); transform: translateY(-4px); }
+    .cert-icon { width: 50px; height: 50px; border-radius: 12px; background: linear-gradient(135deg,rgba(108,99,255,0.2),rgba(255,101,132,0.2)); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+    .cert-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .cert-issuer { color: var(--accent); font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .cert-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.6; font-weight: 300; }
+    #projects { background: var(--surface); }
+    .project-card { max-width: 520px; background: var(--surface2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.3s; }
+    .project-card:hover { border-color: rgba(108,99,255,0.4); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+    .project-banner { width: 100%; height: 160px; background: linear-gradient(135deg,#0a1520,#0d3d6e); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; position: relative; overflow: hidden; }
+    .project-banner::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(108,99,255,0.2), transparent 70%); }
+    .project-body { padding: 1.5rem; }
+    .project-title { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .project-period { font-size: 0.78rem; color: var(--accent); font-weight: 600; margin-bottom: 0.8rem; letter-spacing: 0.06em; }
+    .project-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; font-weight: 300; margin-bottom: 1.2rem; }
+    #contact { background: var(--bg); }
+    .contact-wrap { max-width: 650px; margin: 0 auto; text-align: center; }
+    .contact-wrap .section-header { text-align: center; }
+    .contact-wrap .section-line { margin: 1rem auto 0; }
+    .contact-email { font-family: 'Syne', sans-serif; font-size: clamp(1.1rem,2.5vw,1.6rem); font-weight: 700; color: var(--text); text-decoration: none; display: block; margin: 2rem 0 0.6rem; transition: color 0.2s; word-break: break-all; }
+    .contact-email:hover { color: var(--accent); }
+    .contact-phone { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; display: block; }
+    .socials { display: flex; justify-content: center; gap: 1.2rem; margin-top: 2.5rem; }
+    .social-link { width: 50px; height: 50px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); display: flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; transition: all 0.25s; }
+    .social-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(108,99,255,0.2); }
+    footer { padding: 2rem 5%; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 0.85rem; }
+    @keyframes fadeInDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--text); transition: 0.3s; border-radius: 99px; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; }
+      .avatar-frame { width: 220px; height: 220px; }
+      .about-meta { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#hero" class="logo">MR.</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-bg-orb orb1"></div>
+    <div class="hero-bg-orb orb2"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Open to new opportunities · Bengaluru, India
+      </div>
+      <h1>
+        Hi, I'm<br/>
+        <span class="gradient-text">Mrityunjay</span><br/>
+        Ranjan.
+      </h1>
+      <p class="hero-desc">
+        Software Engineer with <strong>5+ years of experience</strong> in Java-based enterprise applications, RESTful APIs, and cloud technologies. Currently at <strong>Accenture</strong>, delivering high-quality, scalable solutions.
+      </p>
+      <div class="hero-actions">
+        <a href="#experience" class="btn-primary">
+          View Experience
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contact" class="btn-secondary">Get in Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">5+</div><div class="stat-label">Years Experience</div></div>
+        <div><div class="stat-num">98%</div><div class="stat-label">Defect-Free Rate</div></div>
+        <div><div class="stat-num">30%</div><div class="stat-label">DevOps Efficiency</div></div>
+        <div><div class="stat-num">2x</div><div class="stat-label">Azure Certified</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="about-grid">
+      <div class="avatar-wrap reveal">
+        <div class="avatar-frame"><div class="avatar-inner">MR</div></div>
+        <div class="avatar-badge">☕ Java Engineer</div>
+      </div>
+      <div class="about-text reveal">
+        <div class="section-header">
+          <span class="section-tag">About Me</span>
+          <h2 class="section-title">Results-driven engineer who builds things that scale.</h2>
+          <div class="section-line"></div>
+        </div>
+        <p>I'm Mrityunjay Ranjan, a Software Engineer with 5+ years of hands-on experience in Java, enterprise application integration, and web application development. My work at Accenture spans API development, team mentorship, and DevOps optimisation.</p>
+        <p>I hold two <strong style="color:var(--text);">Microsoft Azure certifications</strong> and have a consistent track record of delivering performance improvements, reducing bugs, and building maintainable systems at scale.</p>
+        <div class="about-meta">
+          <div class="meta-item"><span>📍</span><span>Patna, India</span></div>
+          <div class="meta-item"><span>🏢</span><span>Accenture, Bengaluru</span></div>
+          <div class="meta-item"><span>🎓</span><span>B.Tech ECE, Dr. B.C Roy Engg.</span></div>
+          <div class="meta-item"><span>🌐</span><span>Hindi (Native) · English (Fluent)</span></div>
+        </div>
+        <div class="about-pills">
+          <span class="pill">☕ Java Specialist</span>
+          <span class="pill">☁️ Azure Certified</span>
+          <span class="pill">🚢 DevOps Mindset</span>
+          <span class="pill">🎮 Gamer</span>
+          <span class="pill">🎵 Music Lover</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-header reveal">
+      <span class="section-tag">Technical Stack</span>
+      <h2 class="section-title">Skills & Technologies</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">☕</div>
+        <div class="skill-cat">Core Java & Frameworks</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Java</span><span class="skill-tag">Java 8</span>
+          <span class="skill-tag">J2EE</span><span class="skill-tag">Spring Boot</span>
+          <span class="skill-tag">Spring Security</span><span class="skill-tag">Hibernate</span>
+          <span class="skill-tag">Spring Data JPA</span><span class="skill-tag">Microservices</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🔌</div>
+        <div class="skill-cat">APIs & Data</div>
+        <div class="skill-tags">
+          <span class="skill-tag">RESTful API</span><span class="skill-tag">Postman</span>
+          <span class="skill-tag">SoapUI</span><span class="skill-tag">SQL</span>
+          <span class="skill-tag">Maven</span><span class="skill-tag">Data Structures</span>
+          <span class="skill-tag">Algorithms</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">☁️</div>
+        <div class="skill-cat">Cloud & DevOps</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Azure DevOps</span><span class="skill-tag">Docker</span>
+          <span class="skill-tag">Kubernetes</span><span class="skill-tag">GitLab</span>
+          <span class="skill-tag">Splunk</span><span class="skill-tag">CI/CD</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🛠️</div>
+        <div class="skill-cat">Engineering Practices</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Enterprise Integration</span><span class="skill-tag">System Design</span>
+          <span class="skill-tag">Agile</span><span class="skill-tag">Test Automation</span>
+          <span class="skill-tag">Code Review</span><span class="skill-tag">Team Mentoring</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-header reveal">
+      <span class="section-tag">Career</span>
+      <h2 class="section-title">Work Experience</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">MARCH 2021 — PRESENT · 5+ YEARS</div>
+        <div class="timeline-title">Software Engineer</div>
+        <div class="timeline-company">Accenture · Full-time · Bengaluru, Karnataka</div>
+        <ul class="timeline-list">
+          <li>Developed and maintained Java-based web applications with a focus on quality, achieving a <strong style="color:var(--text);">15% improvement</strong> in overall performance.</li>
+          <li>Conducted API design and implemented RESTful services, resulting in a <strong style="color:var(--text);">20% reduction in response time</strong>.</li>
+          <li>Managed and mentored a development team, implementing best practices that led to a <strong style="color:var(--text);">25% increase in code efficiency</strong>.</li>
+          <li>Collaborated with QA teams to design and implement test cases, achieving a <strong style="color:var(--text);">98% defect-free application</strong> rate.</li>
+          <li>Proactively provided technical support, addressing 100% of user feedback promptly and resolving <strong style="color:var(--text);">95% of reported bugs</strong>.</li>
+          <li>Optimised development and deployment processes by <strong style="color:var(--text);">30%</strong> using DevOps tools: Postman, SoapUI, Splunk, GitLab, and Maven.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-header reveal" style="margin-top:4rem;">
+      <span class="section-tag">Academic</span>
+      <h2 class="section-title">Education</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">AUG 2016 — JUL 2020</div>
+        <div class="timeline-title">B.Tech — Electronics & Communication Engineering</div>
+        <div class="timeline-company">Dr. B. C. Roy Engineering College · Durgapur, West Bengal</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">APR 2014 — MAY 2015</div>
+        <div class="timeline-title">Class XII</div>
+        <div class="timeline-company">Doon Public School · Patna, Bihar</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="section-header reveal">
+      <span class="section-tag">Credentials</span>
+      <h2 class="section-title">Certifications</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card reveal">
+        <div class="cert-icon">🔷</div>
+        <div>
+          <div class="cert-name">Microsoft Azure Fundamentals</div>
+          <div class="cert-issuer">Microsoft · AZ-900 · June 2023 – Present</div>
+          <div class="cert-desc">Foundational expertise in cloud concepts, Azure services, pricing, SLA, governance, security, and deploying Azure resources.</div>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">📊</div>
+        <div>
+          <div class="cert-name">Microsoft Azure Data Fundamentals</div>
+          <div class="cert-issuer">Microsoft · DP-900 · June 2023 – Present</div>
+          <div class="cert-desc">Expertise in Azure cloud data services, Azure SQL Database, Azure Data Lake Storage, and core Azure data processing techniques.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-header reveal">
+      <span class="section-tag">My Work</span>
+      <h2 class="section-title">Personal Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-banner">🛰️</div>
+      <div class="project-body">
+        <div class="project-period">AUG 2019 — JAN 2020</div>
+        <div class="project-title">IRNSS — Indian Regional Navigation Satellite System</div>
+        <p class="project-desc">College project focused on India's autonomous regional satellite navigation system developed by ISRO. Involved research into signal processing concepts and analysis of navigation data from Indian satellites, contributing to understanding of geospatial positioning systems.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Satellite Systems</span>
+          <span class="skill-tag">Signal Processing</span>
+          <span class="skill-tag">Navigation Tech</span>
+          <span class="skill-tag">ISRO</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-wrap">
+      <div class="section-header reveal">
+        <span class="section-tag">Let's Connect</span>
+        <h2 class="section-title">Get in Touch</h2>
+        <div class="section-line"></div>
+      </div>
+      <p class="reveal" style="color:var(--muted);">Whether it's a full-time opportunity, a collaboration, or just a conversation — feel free to reach out!</p>
+      <a href="mailto:mrityunjay.ranjan28@gmail.com" class="contact-email reveal">mrityunjay.ranjan28@gmail.com</a>
+      <span class="contact-phone reveal">(+91) 7001541822</span>
+      <a href="mailto:mrityunjay.ranjan28@gmail.com" class="btn-primary reveal" style="display:inline-flex;margin:0 auto 0;">Say Hello 👋</a>
+      <div class="socials reveal">
+        <a href="https://linkedin.com/in/ranjan-mrityunjay" class="social-link" target="_blank" title="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://github.com/" class="social-link" target="_blank" title="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+        </a>
+        <a href="mailto:mrityunjay.ranjan28@gmail.com" class="social-link" title="Email">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+        <a href="tel:+917001541822" class="social-link" title="Call">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.2 2 2 0 012.2 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Designed & Built by <strong>Mrityunjay Ranjan</strong></span>
+    <span>© 2025 · Software Engineer</span>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').style.boxShadow = window.scrollY > 20 ? '0 4px 40px rgba(0,0,0,0.4)' : 'none';
+    });
+
+    function toggleMenu() {
+      const links = document.querySelector('.nav-links');
+      if (links.style.display === 'flex') {
+        links.style.display = 'none';
+      } else {
+        Object.assign(links.style, {
+          display:'flex', flexDirection:'column', position:'absolute',
+          top:'70px', left:'0', right:'0',
+          background:'rgba(10,10,15,0.97)',
+          padding:'1.5rem 5%',
+          borderBottom:'1px solid rgba(108,99,255,0.15)',
+          backdropFilter:'blur(20px)', zIndex:'99'
+        });
+      }
+    }
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => { document.querySelector('.nav-links').style.display = 'none'; });
+    });
+  </script>
+</body>
+</html>
